@@ -16,3 +16,6 @@ def success(request):
             return redirect("index")
     return redirect("index")
 
+def signup(request):
+    return render(request, 'signup.html')
+
