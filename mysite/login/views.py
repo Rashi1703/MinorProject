@@ -19,3 +19,15 @@ def success(request):
 def signup(request):
     return render(request, 'signup.html')
 
+def register(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        Email = request.POST.get('email')
+        Login = Users(username=username,mail=Email, password=password)
+        try:
+            Login.save()
+        except:
+            return HttpResponse('404 error')
+    return render(request, 'login.html')
+
