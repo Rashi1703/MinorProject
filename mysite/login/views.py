@@ -31,3 +31,5 @@ def register(request):
             return HttpResponse('404 error')
     return render(request, 'login.html')
 
+def forgot_password(request):
+    return render(request, 'forgot_password.html')
