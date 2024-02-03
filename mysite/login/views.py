@@ -1,6 +1,9 @@
 from django.http import HttpResponse
 from django.shortcuts import render,redirect
 from .models import Users
+import smtplib
+import ssl
+from email.message import EmailMessage
 # Create your views here.
 def index(request):
     return render(request, 'login.html')
@@ -33,3 +36,32 @@ def register(request):
 
 def forgot_password(request):
     return render(request, 'forgot_password.html')
+
+def send_password(request):
+    if request.method == 'POST':
+        entered_username = request.POST.get('username')
+        entered_email = request.POST.get('email')
+        Users_registered=Users.objects.filter(username=entered_username,mail=entered_email)
+        if Users_registered.exists():
+            ob=Users.objects.get(username=entered_username)
+            password_tosend=ob.password
+            try:
+                email_sender = 'rashijain1710@gmail.com'
+                email_password = 'fkep hojo abpc hboy'
+                email_receiver = entered_email
+                em = EmailMessage()
+                em['From'] = email_sender
+                em['To'] = email_receiver
+                em['Subject'] = "Welcome to sentiment analysis"
+                em.set_content(str(password_tosend))
+                context = ssl.create_default_context()
+                with smtplib.SMTP_SSL('smtp.gmail.com', 465, context=context) as smtp:
+                    smtp.login(email_sender, email_password)
+                    smtp.sendmail(email_sender, email_receiver, em.as_string())
+            except:
+                return redirect("home")
+
+
+        else:
+            return redirect("home")
+    return redirect("index")
