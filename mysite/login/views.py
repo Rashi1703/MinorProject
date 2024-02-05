@@ -4,6 +4,11 @@ from .models import Users
 import smtplib
 import ssl
 from email.message import EmailMessage
+import matplotlib.pyplot as plt
+import nltk
+from nltk.sentiment.vader import SentimentIntensityAnalyzer
+from googletrans import Translator
+nltk.download('vader_lexicon')
 # Create your views here.
 def index(request):
     return render(request, 'login.html')
@@ -80,7 +85,64 @@ def ResultAudio(request):
     return HttpResponse('Audio')
 
 def ResultText(request):
-    return redirect('Result')
+    if request.method == 'POST':
+        choosen_language = request.POST.get('select_box')
+        if choosen_language == 'en':
+            text = request.POST.get('text_input')
+            analyzer = SentimentIntensityAnalyzer()
+            sentiment_scores = analyzer.polarity_scores(text)
+            compound_score = sentiment_scores['compound']
+            if compound_score >= 0.05:
+                sentiment = "Positive"
+            elif compound_score <= -0.05:
+                sentiment = "Negative"
+            else:
+                sentiment = "Neutral"
+            a = sentiment_scores['neg']
+            b = sentiment_scores['neu']
+            c = sentiment_scores['pos']
+            s = ["Negative", "Neutral", "Positive"]
+            l = [a, b, c]
+            plt.bar(s, l, color=['r','b','g'])
+            plt.savefig('C:\\Users\\rashi\\PycharmProjects\\MinorProject\\mysite\\login'+'\static\images\Sentigraph.png')
+            return render(request,'Result.html',{'Entered_text':text,'Sentiment':sentiment,})
+        else:
+
+            text = request.POST.get('text_input')
+
+            # Download the VADER lexicon (if not already downloaded)
+            nltk.download('vader_lexicon')
+
+            # Initialize the VADER sentiment analyzer
+            analyzer = SentimentIntensityAnalyzer()
+
+            # Sample text for sentiment analysis
+            translator = Translator()
+            # Translate Marathi text text to English
+            english_text = translator.translate(text, src=choosen_language, dest='en').text
+            # Perform sentiment analysis
+            sentiment_scores = analyzer.polarity_scores(english_text)
+
+            # Interpret the sentiment scores
+            compound_score = sentiment_scores['compound']
+
+            if compound_score >= 0.05:
+                sentiment = "Positive"
+            elif compound_score <= -0.05:
+                sentiment = "Negative"
+            else:
+                sentiment = "Neutral"
+            print(sentiment)
+            a = sentiment_scores['neg']
+            b = sentiment_scores['neu']
+            c = sentiment_scores['pos']
+            s = ["Negative", "Neutral", "Positive"]
+            l = [a, b, c]
+            plt.bar(s, l, color=['r','b','g'])
+            plt.savefig('C:\\Users\\rashi\\PycharmProjects\\MinorProject\\mysite\\login'+'\static\images\Sentigraph.png')
+            return render(request,'Result.html',{'Entered_text':text,'Sentiment':sentiment,})
+
+    return redirect('index')
 
 def Result(request):
     return render(request,'Result.html')

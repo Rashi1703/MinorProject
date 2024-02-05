@@ -56,37 +56,36 @@ body{
 			<img src="{% static '/images/main_logo.jpg' %}" alt="" srcset="" />
 			<ul>
 				<button class="nav_btn"><a href="{% url 'home' %}">HOME</a></button>
-				<button class="nav_btn"><a href="{% url 'signup' %}">REGISTER</a></button>
 			</ul>
 		</div>
 	</nav>
     <div style="
         display: flex;
-        height: 88vh;
+        height: 86vh;
         justify-content: space-around;
         align-items: center;
       " class="container">
-      <div style="margin: auto; background-color:#054871 ; border:solid 1px white; border-radius: 40px; padding:2%">
+      <div style="margin: auto; background-color:#054871 ; border:solid 1px white; border-radius: 40px; padding:1%">
 
 
           <img src="{% static '/images/Audio.jpg' %}" alt="" srcset=""
-          width="600"
-          height="600"
+          width="500"
+          height="400"
           style="border: solid 1px white; border-radius: 40px"/>
-           <button class="btn" style="margin-top:5%; width:580px" ><a href="{% url 'AudioBased' %}"><h1>Audio Based Sentiment Analysis</h1></a></button>
+           <button class="btn" style="margin-top:5%; width:450px" ><a href="{% url 'AudioBased' %}"><h1>Audio Based Sentiment Analysis</h1></a></button>
 
       </div>
 
       <div id="right"
         style="margin: auto;
         background-color:#054871 ;
-        border:solid 1px white; border-radius: 40px; padding:2%
+        border:solid 1px white; border-radius: 40px; padding:1%
         ">
           <img src="{% static '/images/Text.jpg' %}" alt="" srcset=""
-          width="600"
-          height="600"
+          width="500"
+          height="400"
           style="border: solid 1px white; border-radius: 40px"/>
-          <button class="btn" style="margin-top:5%; width:580px"><a href="{% url 'TextBased' %}"><h1>Text Based Sentiment Analysis</h1></a></button>
+          <button class="btn" style="margin-top:5%; width:450px"><a href="{% url 'TextBased' %}"><h1>Text Based Sentiment Analysis</h1></a></button>
 
       </div>
     </div>

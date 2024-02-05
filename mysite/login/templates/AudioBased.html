@@ -51,24 +51,23 @@ body{
 			<img src="{% static '/images/main_logo.jpg' %}" alt="" srcset="" />
 			<ul>
 				<button class="nav_btn"><a href="{% url 'home' %}">HOME</a></button>
-				<button class="nav_btn"><a href="{% url 'signup' %}">REGISTER</a></button>
 			</ul>
 		</div>
 	</nav>
     <div
       style="
         display: flex;
-        height: 100vh;
+        height: 86vh;
         justify-content: space-around;
         align-items: center;
       "
       class="container"
     >
-      <div style="margin: auto; background-color: white; border-radius: 40px">
+      <div style="margin: auto; background-color:#054871; border:solid 1px white; border-radius: 40px; padding:1%">
 			<img
-          src="loginpage.gif"
-          width="700"
-          height="700"
+          src="{% static '/images/Audio.jpg' %}"
+          width="500"
+          height="500"
           style="border: solid 1px white; border-radius: 40px"
         />
       </div>
@@ -76,8 +75,8 @@ body{
         id="right"
         style="
           margin: auto;
-          width: 600px;
-          height: 700px;
+          width: 440px;
+          height: 420px;
           padding: 10px;
           border: 1px solid black;
           background-color: white;
@@ -85,10 +84,10 @@ body{
         "
       >
         <button
-          type="Sumbit"
+          type="Submit"
           style="
-            width: 300px;
-            height: 300px;
+            width: 200px;
+            height: 200px;
 
             border: #A0A0A0 solid 3px;
             background-color:#68718C;
@@ -96,10 +95,10 @@ body{
             color: white;
 
             border-radius: 50%;
-            margin: 7% 23%;
+            margin: 8% 23%;
             font-size:90px;
             box-shadow: 2px 2px 4px #aaa;
-            margin-top:15%;
+            margin-left: 25%;
           "
         >
           <i class="fa-solid fa-microphone"></i>
@@ -113,7 +112,7 @@ body{
             width: 84%;
             height: 15%;
             border: #1975ff solid 3px;
-            background-color: #1975ff;
+            background-color: #054871;
             border-radius: 10px;
             color: white;
             font-size: 24px;
