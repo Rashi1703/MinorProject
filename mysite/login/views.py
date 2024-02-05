@@ -14,7 +14,7 @@ def success(request):
         entered_password = request.POST.get('password')
         Users_registered=Users.objects.filter(username=entered_username,password=entered_password)
         if Users_registered.exists():
-            return HttpResponse('success')
+            return redirect('choice')
         else:
             return redirect("index")
     return redirect("index")
@@ -65,3 +65,22 @@ def send_password(request):
         else:
             return redirect("home")
     return redirect("index")
+
+
+def choice(request):
+    return render(request, 'choice.html')
+
+def AudioBased(request):
+    return render(request, 'AudioBased.html')
+
+def TextBased(request):
+    return render(request, 'TextBased.html')
+
+def ResultAudio(request):
+    return HttpResponse('Audio')
+
+def ResultText(request):
+    return redirect('Result')
+
+def Result(request):
+    return render(request,'Result.html')

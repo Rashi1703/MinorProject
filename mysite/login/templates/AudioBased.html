@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>Sentiment Analysis of Social Media Presence</title>
+
+  {% load static %}
+
+      <style>
+
+*{
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+  }
+
+body{
+  margin: 0;
+}
+          .navbar{
+			background: white; font-family: calibri; padding-right: 15px;padding-left: 15px;
+		}
+		.navdiv{
+			display: flex; align-items: center; justify-content: space-between;
+		}
+		.navdiv img{
+			height: 90px;
+          width: 350px;
+		}
+		.nav_btn{
+			background-color: #0E4C92; margin-left: 10px; border-radius: 10px; padding: 14px; width: 105px;height: 50px;
+		}
+		.nav_btn a{
+			color: white; font-weight: bold; font-size: 15px;
+          text-decoration: none;
+		}
+
+      </style>
+     <script
+      src="https://kit.fontawesome.com/f63094987e.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+
+
+
+  <body style="font-family: 'Noto Serif', serif; background-color: #054871">
+
+
+  <nav class="navbar">
+		<div class="navdiv">
+			<img src="{% static '/images/main_logo.jpg' %}" alt="" srcset="" />
+			<ul>
+				<button class="nav_btn"><a href="{% url 'home' %}">HOME</a></button>
+				<button class="nav_btn"><a href="{% url 'signup' %}">REGISTER</a></button>
+			</ul>
+		</div>
+	</nav>
+    <div
+      style="
+        display: flex;
+        height: 100vh;
+        justify-content: space-around;
+        align-items: center;
+      "
+      class="container"
+    >
+      <div style="margin: auto; background-color: white; border-radius: 40px">
+			<img
+          src="loginpage.gif"
+          width="700"
+          height="700"
+          style="border: solid 1px white; border-radius: 40px"
+        />
+      </div>
+      <div
+        id="right"
+        style="
+          margin: auto;
+          width: 600px;
+          height: 700px;
+          padding: 10px;
+          border: 1px solid black;
+          background-color: white;
+          border-radius: 40px;
+        "
+      >
+        <button
+          type="Sumbit"
+          style="
+            width: 300px;
+            height: 300px;
+
+            border: #A0A0A0 solid 3px;
+            background-color:#68718C;
+
+            color: white;
+
+            border-radius: 50%;
+            margin: 7% 23%;
+            font-size:90px;
+            box-shadow: 2px 2px 4px #aaa;
+            margin-top:15%;
+          "
+        >
+          <i class="fa-solid fa-microphone"></i>
+
+        </button>
+        <button
+          type="Sumbit"
+          style="
+            padding: 8px;
+            margin: 6%;
+            width: 84%;
+            height: 15%;
+            border: #1975ff solid 3px;
+            background-color: #1975ff;
+            border-radius: 10px;
+            color: white;
+            font-size: 24px;
+            font-weight: 700;
+            box-shadow: 2px 2px 4px #aaa;
+          "
+        >Analyse Sentiments
+
+        </button>
+      </div>
+    </div>
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+  </body>
+</html>
