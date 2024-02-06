@@ -8,8 +8,8 @@ import matplotlib.pyplot as plt
 import nltk
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
 from googletrans import Translator
+import speech_recognition as sr
 
-nltk.download('vader_lexicon')
 
 import pandas as pd
 import numpy as np
@@ -18,7 +18,7 @@ import re
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense
 
-nltk.download('stopwords')
+
 from nltk.corpus import stopwords
 from nltk.stem.porter import PorterStemmer
 from sklearn.model_selection import train_test_split
@@ -109,6 +109,8 @@ def ResultAudio(request):
     return HttpResponse('Audio')
 def model_training():
     global train_path,ps,cv,data,model1,cv_transformer
+    nltk.download('vader_lexicon')
+    nltk.download('stopwords')
     train_path = pd.read_csv('C:\\Users\\rashi\\PycharmProjects\\MinorProject\\mysite\\login'+'\\train.csv', encoding='ISO-8859-1',nrows=1000)
     ps = PorterStemmer()
     cv = CountVectorizer()
@@ -190,3 +192,20 @@ def ResultText(request):
 
 def Result(request):
     return render(request, 'Result.html')
+
+def listen(request):
+    global audio_record
+    r = sr.Recognizer()
+    with sr.Microphone() as source:
+        r.adjust_for_ambient_noise(source)
+        audio = r.listen(source)
+        try:
+            audio_record=r.recognize_google(audio)
+        except Exception as e:
+            audio_record=''
+    new_review_prediction = predict_sentiment(audio_record)
+    predicted_class = np.argmax(new_review_prediction)
+    sentiment_labels = ['Negative', 'Neutral', 'Positive']
+    predicted_sentiment = sentiment_labels[predicted_class]
+    return render(request, 'Result.html', {'Entered_text': audio_record, 'Sentiment': predicted_sentiment, })
+
