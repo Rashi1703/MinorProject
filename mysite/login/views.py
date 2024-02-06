@@ -111,7 +111,7 @@ def model_training():
     global train_path,ps,cv,data,model1,cv_transformer
     nltk.download('vader_lexicon')
     nltk.download('stopwords')
-    train_path = pd.read_csv('C:\\Users\\rashi\\PycharmProjects\\MinorProject\\mysite\\login'+'\\train.csv', encoding='ISO-8859-1',nrows=1000)
+    train_path = pd.read_csv('C:\\Users\\rashi\\PycharmProjects\\MinorProject\\mysite\\login'+'\\train.csv', encoding='ISO-8859-1',nrows=10000)
     ps = PorterStemmer()
     cv = CountVectorizer()
     train_path = train_path.dropna(subset=['text'])
