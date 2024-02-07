@@ -4,9 +4,7 @@ from .models import Users
 import smtplib
 import ssl
 from email.message import EmailMessage
-import matplotlib.pyplot as plt
 import nltk
-from nltk.sentiment.vader import SentimentIntensityAnalyzer
 from googletrans import Translator
 import speech_recognition as sr
 
@@ -24,7 +22,8 @@ from nltk.stem.porter import PorterStemmer
 from sklearn.model_selection import train_test_split
 from sklearn.feature_extraction.text import CountVectorizer
 
-
+nltk.download('vader_lexicon')
+nltk.download('stopwords')
 # Create your views here.
 def index(request):
     return render(request, 'login.html')
@@ -109,8 +108,6 @@ def ResultAudio(request):
     return HttpResponse('Audio')
 def model_training():
     global train_path,ps,cv,data,model1,cv_transformer
-    nltk.download('vader_lexicon')
-    nltk.download('stopwords')
     train_path = pd.read_csv('C:\\Users\\rashi\\PycharmProjects\\MinorProject\\mysite\\login'+'\\train.csv', encoding='ISO-8859-1',nrows=10000)
     ps = PorterStemmer()
     cv = CountVectorizer()
@@ -171,14 +168,9 @@ def ResultText(request):
             lan_text = request.POST.get('text_input')
 
         # Download the VADER lexicon (if not already downloaded)
-            nltk.download('vader_lexicon')
 
-        # Initialize the VADER sentiment analyzer
-            analyzer = SentimentIntensityAnalyzer()
 
-        # Sample text for sentiment analysis
             translator = Translator()
-        # Translate Marathi text text to English
             text = translator.translate(lan_text, src=choosen_language, dest='en').text
         # Perform sentiment analysis
             new_review_prediction = predict_sentiment(text)
